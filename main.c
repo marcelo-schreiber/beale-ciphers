@@ -23,8 +23,10 @@ int char_to_arr_idx(char c)
 {
   if (c >= 'a' && c <= 'z')
     return c - 'a';
-  else
+  if (c >= '0' && c <= '9')
     return c - '0' + 26;
+  else
+    return -1;
 }
 
 void print_letter(Letter *letter)
@@ -68,11 +70,15 @@ int main(void)
   while (fscanf(fp, " %1023s", word) != EOF)
   {
     int i = 0;
-    char firstChar = tolower(word[0]);
-    while (letters[char_to_arr_idx(firstChar)].codes[i] != 0)
+    char firstCharIdx = char_to_arr_idx(tolower(word[0]));
+
+    if (firstCharIdx == -1) // if first character is not a letter or number
+      continue;
+
+    while (letters[firstCharIdx].codes[i] != 0) // find the first empty slot
       i++;
 
-    letters[char_to_arr_idx(firstChar)].codes[i] = word_idx;
+    letters[firstCharIdx].codes[i] = word_idx; // store the word index
 
     word_idx++;
   }
