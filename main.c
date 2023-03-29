@@ -10,8 +10,9 @@ typedef struct Letter
 
 #define MAX_NUM_OF_CODES_PER_CHAR 100
 #define NUM_OF_CHARS 26 + 9
+#define MAX_WORD_SIZE 1024
 
-char arr_idx_to_char(int code)
+char ArrIdxToChar(int code)
 {
   if (code < 26)
     return code + 'a';
@@ -19,7 +20,7 @@ char arr_idx_to_char(int code)
     return code + '0' - 26;
 }
 
-int char_to_arr_idx(char c)
+int CharToArrIdx(char c)
 {
   if (c >= 'a' && c <= 'z')
     return c - 'a';
@@ -29,12 +30,12 @@ int char_to_arr_idx(char c)
     return -1;
 }
 
-void print_letter(Letter *letter)
+void PrintLetter(Letter *letter)
 {
   for (int i = 0; i < NUM_OF_CHARS; i++)
   {
     int j = 0;
-    printf("\n%c:", arr_idx_to_char(i));
+    printf("\n%c:", ArrIdxToChar(i));
 
     while (letter[i].codes[j] != 0)
     {
@@ -62,13 +63,13 @@ int main(void)
     return 1;
   }
 
-  char *word = malloc(100 * sizeof(char));
+  char *word = malloc(sizeof(char) * MAX_WORD_SIZE);
   int word_idx = 1;
 
   while (fscanf(fp, " %1023s", word) != EOF)
   {
     int i = 0;
-    char firstCharIdx = char_to_arr_idx(tolower(word[0]));
+    char firstCharIdx = CharToArrIdx(tolower(word[0]));
 
     if (firstCharIdx == -1) // if first character is not a letter or number
       continue;
@@ -81,7 +82,7 @@ int main(void)
     word_idx++;
   }
 
-  print_letter(letters);
+  PrintLetter(letters);
 
   free(word);
   free(letters);
