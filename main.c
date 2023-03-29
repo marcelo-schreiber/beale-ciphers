@@ -8,9 +8,9 @@ typedef struct Letter
   int *codes;
 } Letter;
 
-#define MAX_NUM_OF_CODES_PER_CHAR 100
-#define NUM_OF_CHARS 26 + 9
-#define MAX_WORD_SIZE 1024
+#define MAX_NUM_OF_CODES_PER_CHAR 100 // 100 codes per letter at max
+#define NUM_OF_CHARS 26 + 9           // 26 letters and 9 numbers
+#define MAX_WORD_SIZE 1024            // 1024 characters
 
 char ArrIdxToChar(int code)
 {
