@@ -11,13 +11,28 @@ typedef struct Letter
 #define MAX_NUM_OF_CODES_PER_CHAR 100
 #define NUM_OF_CHARS 26 + 9
 
-void printLetter(Letter *letter)
+char arr_idx_to_char(int code)
+{
+  if (code < 26)
+    return code + 'a';
+  else
+    return code + '0' - 26;
+}
+
+int char_to_arr_idx(char c)
+{
+  if (c >= 'a' && c <= 'z')
+    return c - 'a';
+  else
+    return c - '0' + 26;
+}
+
+void print_letter(Letter *letter)
 {
   for (int i = 0; i < NUM_OF_CHARS; i++)
   {
     int j = 0;
-    if (letter[i].codes[j] != 0)
-      printf("\n%c:", i + 'a');
+    printf("\n%c:", arr_idx_to_char(i));
 
     while (letter[i].codes[j] != 0)
     {
@@ -25,7 +40,6 @@ void printLetter(Letter *letter)
       j++;
     }
   };
-  printf("\n");
 }
 
 int main(void)
@@ -55,31 +69,15 @@ int main(void)
   {
     int i = 0;
     char firstChar = tolower(word[0]);
-    if (firstChar >= 'a' && firstChar <= 'z')
-    {
-      while (letters[firstChar - 'a'].codes[i] != 0)
-        i++;
+    while (letters[char_to_arr_idx(firstChar)].codes[i] != 0)
+      i++;
 
-      letters[firstChar - 'a'].codes[i] = word_idx;
+    letters[char_to_arr_idx(firstChar)].codes[i] = word_idx;
 
-      word_idx++;
-    }
-    else if (firstChar >= '0' && firstChar <= '9')
-    {
-      while (letters[firstChar - '0' + 26].codes[i] != 0)
-        i++;
-
-      letters[firstChar - '0' + 26].codes[i] = word_idx;
-
-      word_idx++;
-    }
-    else
-    {
-      printf("Error: %c", firstChar);
-    }
+    word_idx++;
   }
 
-  printLetter(letters);
+  print_letter(letters);
 
   free(word);
   free(letters);
