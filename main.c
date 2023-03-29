@@ -63,8 +63,6 @@ int main(void)
   }
 
   char *word = malloc(100 * sizeof(char));
-  size_t len = 0;
-  size_t read;
   int word_idx = 1;
 
   while (fscanf(fp, " %1023s", word) != EOF)
