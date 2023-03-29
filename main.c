@@ -16,8 +16,10 @@ char ArrIdxToChar(int code)
 {
   if (code < 26)
     return code + 'a';
-  else
+  if (code >= 26 && code < 36)
     return code + '0' - 26;
+  else
+    return -1;
 }
 
 int CharToArrIdx(char c)
@@ -85,7 +87,10 @@ int main(void)
   PrintLetter(letters);
 
   free(word);
+  for (int i = 0; i < NUM_OF_CHARS; i++)
+    free(letters[i].codes);
   free(letters);
+
   fclose(fp);
 
   return 0;
