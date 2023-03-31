@@ -75,7 +75,7 @@ void generateLetters(struct Letter *letters, FILE *fp)
 
   while (fscanf(fp, " %255s", word) != EOF)
   {
-    unsigned char first_char_idx = charToArrIdx(tolower(word[0]));
+    unsigned int first_char_idx = charToArrIdx(tolower(word[0]));
 
     if (first_char_idx == -1) // if first character is not a letter or number
       continue;
