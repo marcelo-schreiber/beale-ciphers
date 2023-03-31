@@ -57,9 +57,7 @@ void initializeMultipleLetters(struct Letter *letters, int size)
 {
   memset(letters, 0, sizeof(*letters));
   for (int i = 0; i < size; i++)
-  {
     initializeLetter(&letters[i]);
-  }
 }
 
 void generateLetters(struct Letter *letters, FILE *fp)
@@ -97,4 +95,8 @@ void generateLetters(struct Letter *letters, FILE *fp)
     word_idx++;
   }
   free(word);
+
+  // realloc to the exact size
+  for (int i = 0; i < NUM_OF_CHARS; i++)
+    letters[i].codes = realloc(letters[i].codes, sizeof(int) * letters[i].size);
 }
