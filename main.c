@@ -6,11 +6,12 @@
 typedef struct Letter
 {
   int *codes;
+  unsigned int size;
+  unsigned int mem_size;
 } Letter;
 
-#define MAX_NUM_OF_CODES_PER_CHAR 100 // 100 codes per letter at max
-#define NUM_OF_CHARS 26 + 9           // 26 letters and 9 numbers
-#define MAX_WORD_SIZE 1024            // 1024 characters
+#define NUM_OF_CHARS 26 + 10 // 26 letters and 10 numbers
+#define MAX_WORD_SIZE 255    // 1024 characters
 
 char ArrIdxToChar(int code)
 {
@@ -34,12 +35,18 @@ int CharToArrIdx(char c)
 
 void PrintLetter(Letter *letter)
 {
+  int j;
+
   for (int i = 0; i < NUM_OF_CHARS; i++)
   {
-    int j = 0;
+    j = 0;
+    int size = letter[i].size;
+    if (size == 0)
+      continue;
+
     printf("\n%c:", ArrIdxToChar(i));
 
-    while (letter[i].codes[j] != 0)
+    while (j < size)
     {
       printf(" %d ", letter[i].codes[j]);
       j++;
@@ -50,11 +57,14 @@ void PrintLetter(Letter *letter)
 int main(void)
 {
   Letter *letters = malloc(sizeof(Letter) * (NUM_OF_CHARS));
+  memset(letters, 0, sizeof(*letters));
 
   for (int i = 0; i < NUM_OF_CHARS; i++)
   {
-    letters[i].codes = malloc(sizeof(int) * MAX_NUM_OF_CODES_PER_CHAR);
-    memset(letters[i].codes, 0, sizeof(int) * MAX_NUM_OF_CODES_PER_CHAR);
+    letters[i].codes = malloc(sizeof(int));
+    letters[i].codes[0] = 0;
+    letters[i].size = 0;
+    letters[i].mem_size = 1;
   }
   // read file and store first character of each letter
   FILE *fp = fopen("words.txt", "r");
@@ -66,20 +76,34 @@ int main(void)
   }
 
   char *word = malloc(sizeof(char) * MAX_WORD_SIZE);
+
+  if (word == NULL)
+  {
+    printf("Error allocating memory");
+    return 1;
+  }
+
   int word_idx = 1;
 
-  while (fscanf(fp, " %1023s", word) != EOF)
+  while (fscanf(fp, " %255s", word) != EOF)
   {
-    int i = 0;
     char firstCharIdx = CharToArrIdx(tolower(word[0]));
 
     if (firstCharIdx == -1) // if first character is not a letter or number
       continue;
 
-    while (letters[firstCharIdx].codes[i] != 0) // find the first empty slot
-      i++;
+    if (++(letters[firstCharIdx].size) > letters[firstCharIdx].mem_size) // if size is bigger than memory size, double memory size, this prevents too much reallocation
+    {
+      letters[firstCharIdx].mem_size = letters[firstCharIdx].mem_size * 2;
+      letters[firstCharIdx].codes = realloc(letters[firstCharIdx].codes, sizeof(int) * letters[firstCharIdx].mem_size);
 
-    letters[firstCharIdx].codes[i] = word_idx; // store the word index
+      if (letters[firstCharIdx].codes == NULL)
+      {
+        printf("Error allocating memory");
+        return 1;
+      }
+    }
+    letters[firstCharIdx].codes[letters[firstCharIdx].size - 1] = word_idx; // store word index in array of codes in position of size
 
     word_idx++;
   }
