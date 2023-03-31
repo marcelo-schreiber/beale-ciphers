@@ -104,7 +104,7 @@ void generateLetters(struct Letter *letters, FILE *fp)
     if (letters[i].size == 0)
     {
       free(letters[i].codes);
-      letters[i].codes = NULL;
+      letters[i].codes = NULL; // set to NULL so it can be freed later
       continue;
     }
     letters[i].codes = realloc(letters[i].codes, sizeof(int) * letters[i].size);
