@@ -23,7 +23,10 @@ int main(void)
   printLetter(letters);
 
   for (int i = 0; i < NUM_OF_CHARS; i++)
-    free(letters[i].codes);
+  {
+    if (letters[i].codes != NULL || letters[i].mem_size != 0) // if the letter is not empty or already was freed
+      free(letters[i].codes);
+  }
   free(letters);
 
   fclose(fp);

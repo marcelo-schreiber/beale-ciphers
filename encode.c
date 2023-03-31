@@ -98,5 +98,15 @@ void generateLetters(struct Letter *letters, FILE *fp)
 
   // realloc to the exact size
   for (int i = 0; i < NUM_OF_CHARS; i++)
+  {
+
+    letters[i].mem_size = letters[i].size;
+    if (letters[i].size == 0)
+    {
+      free(letters[i].codes);
+      letters[i].codes = NULL;
+      continue;
+    }
     letters[i].codes = realloc(letters[i].codes, sizeof(int) * letters[i].size);
+  }
 }
