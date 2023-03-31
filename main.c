@@ -70,6 +70,43 @@ void initializeMultipleLetters(struct Letter *letters, int size)
   }
 }
 
+void generateLetters(struct Letter *letters, FILE *fp)
+{
+  int word_idx = 0;
+  char *word = malloc(sizeof(char) * MAX_WORD_SIZE);
+
+  if (word == NULL)
+  {
+    printf("Error allocating memory");
+    exit(1);
+  }
+
+  while (fscanf(fp, " %255s", word) != EOF)
+  {
+    char first_char_idx = charToArrIdx(tolower(word[0]));
+
+    if (first_char_idx == -1) // if first character is not a letter or number
+      continue;
+
+    if (++(letters[first_char_idx].size) > letters[first_char_idx].mem_size) // if size is bigger than memory size, double memory size, this prevents too much reallocation
+    {
+      letters[first_char_idx].mem_size *= 2;
+      letters[first_char_idx].codes = realloc(letters[first_char_idx].codes, sizeof(int) * letters[first_char_idx].mem_size);
+
+      if (letters[first_char_idx].codes == NULL)
+      {
+        printf("Error allocating memory");
+        exit(1);
+      }
+    }
+
+    letters[first_char_idx].codes[letters[first_char_idx].size - 1] = word_idx; // store word index in array of codes in position of size
+
+    word_idx++;
+  }
+  free(word);
+}
+
 int main(void)
 {
   struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
@@ -85,42 +122,10 @@ int main(void)
     return 1;
   }
 
-  char *word = malloc(sizeof(char) * MAX_WORD_SIZE);
-
-  if (word == NULL)
-  {
-    printf("Error allocating memory");
-    return 1;
-  }
-
-  int word_idx = 0;
-
-  while (fscanf(fp, " %255s", word) != EOF)
-  {
-    char first_char_idx = charToArrIdx(tolower(word[0]));
-
-    if (first_char_idx == -1) // if first character is not a letter or number
-      continue;
-
-    if (++(letters[first_char_idx].size) > letters[first_char_idx].mem_size) // if size is bigger than memory size, double memory size, this prevents too much reallocation
-    {
-      letters[first_char_idx].mem_size = letters[first_char_idx].mem_size * 2;
-      letters[first_char_idx].codes = realloc(letters[first_char_idx].codes, sizeof(int) * letters[first_char_idx].mem_size);
-
-      if (letters[first_char_idx].codes == NULL)
-      {
-        printf("Error allocating memory");
-        return 1;
-      }
-    }
-    letters[first_char_idx].codes[letters[first_char_idx].size - 1] = word_idx; // store word index in array of codes in position of size
-
-    word_idx++;
-  }
+  generateLetters(letters, fp);
 
   printLetter(letters);
 
-  free(word);
   for (int i = 0; i < NUM_OF_CHARS; i++)
     free(letters[i].codes);
   free(letters);
