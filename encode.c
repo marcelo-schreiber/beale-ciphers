@@ -82,7 +82,7 @@ void generateLetters(struct Letter *letters, FILE *fp)
 
     if (++(letters[first_char_idx].size) > letters[first_char_idx].mem_size) // if size is bigger than memory size, double memory size, this prevents too much reallocation
     {
-      letters[first_char_idx].mem_size *= 2;
+      letters[first_char_idx].mem_size <<= 1;
       letters[first_char_idx].codes = realloc(letters[first_char_idx].codes, sizeof(int) * letters[first_char_idx].mem_size);
 
       if (letters[first_char_idx].codes == NULL)
