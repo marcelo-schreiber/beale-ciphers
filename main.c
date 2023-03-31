@@ -13,7 +13,7 @@ struct Letter
 #define NUM_OF_CHARS 26 + 10 // 26 letters and 10 numbers
 #define MAX_WORD_SIZE 255    // 255 characters
 
-char ArrIdxToChar(int code)
+char arrIdxToChar(int code)
 {
   if (code < 26)
     return code + 'a';
@@ -23,7 +23,7 @@ char ArrIdxToChar(int code)
     return -1;
 }
 
-int CharToArrIdx(char c)
+int charToArrIdx(char c)
 {
   if (c >= 'a' && c <= 'z')
     return c - 'a';
@@ -33,7 +33,7 @@ int CharToArrIdx(char c)
     return -1;
 }
 
-void PrintLetter(struct Letter *letter)
+void printLetter(struct Letter *letter)
 {
   int j;
 
@@ -43,7 +43,7 @@ void PrintLetter(struct Letter *letter)
     if (letter[i].size == 0)
       continue;
 
-    printf("\n%c:", ArrIdxToChar(i));
+    printf("\n%c:", arrIdxToChar(i));
 
     while (j < letter[i].size)
     {
@@ -53,7 +53,7 @@ void PrintLetter(struct Letter *letter)
   };
 }
 
-void InitializeLetter(struct Letter *letter)
+void initializeLetter(struct Letter *letter)
 {
   letter->codes = malloc(sizeof(int));
   letter->codes[0] = 0;
@@ -61,12 +61,12 @@ void InitializeLetter(struct Letter *letter)
   letter->mem_size = 1;
 }
 
-void InitializeLetters(struct Letter *letters)
+void initializeMultipleLetters(struct Letter *letters, int size)
 {
   memset(letters, 0, sizeof(*letters));
-  for (int i = 0; i < NUM_OF_CHARS; i++)
+  for (int i = 0; i < size; i++)
   {
-    InitializeLetter(&letters[i]);
+    initializeLetter(&letters[i]);
   }
 }
 
@@ -74,7 +74,7 @@ int main(void)
 {
   struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
 
-  InitializeLetters(letters);
+  initializeMultipleLetters(letters, NUM_OF_CHARS);
 
   // read file and store first character of each letter
   FILE *fp = fopen("words.txt", "r");
@@ -97,28 +97,28 @@ int main(void)
 
   while (fscanf(fp, " %255s", word) != EOF)
   {
-    char firstCharIdx = CharToArrIdx(tolower(word[0]));
+    char first_char_idx = charToArrIdx(tolower(word[0]));
 
-    if (firstCharIdx == -1) // if first character is not a letter or number
+    if (first_char_idx == -1) // if first character is not a letter or number
       continue;
 
-    if (++(letters[firstCharIdx].size) > letters[firstCharIdx].mem_size) // if size is bigger than memory size, double memory size, this prevents too much reallocation
+    if (++(letters[first_char_idx].size) > letters[first_char_idx].mem_size) // if size is bigger than memory size, double memory size, this prevents too much reallocation
     {
-      letters[firstCharIdx].mem_size = letters[firstCharIdx].mem_size * 2;
-      letters[firstCharIdx].codes = realloc(letters[firstCharIdx].codes, sizeof(int) * letters[firstCharIdx].mem_size);
+      letters[first_char_idx].mem_size = letters[first_char_idx].mem_size * 2;
+      letters[first_char_idx].codes = realloc(letters[first_char_idx].codes, sizeof(int) * letters[first_char_idx].mem_size);
 
-      if (letters[firstCharIdx].codes == NULL)
+      if (letters[first_char_idx].codes == NULL)
       {
         printf("Error allocating memory");
         return 1;
       }
     }
-    letters[firstCharIdx].codes[letters[firstCharIdx].size - 1] = word_idx; // store word index in array of codes in position of size
+    letters[first_char_idx].codes[letters[first_char_idx].size - 1] = word_idx; // store word index in array of codes in position of size
 
     word_idx++;
   }
 
-  PrintLetter(letters);
+  printLetter(letters);
 
   free(word);
   for (int i = 0; i < NUM_OF_CHARS; i++)
