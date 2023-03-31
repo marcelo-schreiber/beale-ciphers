@@ -83,7 +83,7 @@ int main(void)
     return 1;
   }
 
-  int word_idx = 1;
+  int word_idx = 0;
 
   while (fscanf(fp, " %255s", word) != EOF)
   {
