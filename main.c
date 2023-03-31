@@ -11,7 +11,7 @@ typedef struct Letter
 } Letter;
 
 #define NUM_OF_CHARS 26 + 10 // 26 letters and 10 numbers
-#define MAX_WORD_SIZE 255    // 1024 characters
+#define MAX_WORD_SIZE 255    // 255 characters
 
 char ArrIdxToChar(int code)
 {
@@ -53,18 +53,29 @@ void PrintLetter(Letter *letter)
   };
 }
 
+void InitializeLetter(Letter *letter)
+{
+  letter->codes = malloc(sizeof(int));
+  letter->codes[0] = 0;
+  letter->size = 0;
+  letter->mem_size = 1;
+}
+
+void InitializeLetters(Letter *letters)
+{
+  memset(letters, 0, sizeof(*letters));
+  for (int i = 0; i < NUM_OF_CHARS; i++)
+  {
+    InitializeLetter(&letters[i]);
+  }
+}
+
 int main(void)
 {
   Letter *letters = malloc(sizeof(Letter) * (NUM_OF_CHARS));
-  memset(letters, 0, sizeof(*letters));
 
-  for (int i = 0; i < NUM_OF_CHARS; i++)
-  {
-    letters[i].codes = malloc(sizeof(int));
-    letters[i].codes[0] = 0;
-    letters[i].size = 0;
-    letters[i].mem_size = 1;
-  }
+  InitializeLetters(letters);
+
   // read file and store first character of each letter
   FILE *fp = fopen("words.txt", "r");
 
