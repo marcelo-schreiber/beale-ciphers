@@ -3,12 +3,12 @@
 #include <string.h>
 #include <ctype.h>
 
-typedef struct Letter
+struct Letter
 {
   unsigned int *codes;
   unsigned int size;
   unsigned int mem_size;
-} Letter;
+};
 
 #define NUM_OF_CHARS 26 + 10 // 26 letters and 10 numbers
 #define MAX_WORD_SIZE 255    // 255 characters
@@ -33,7 +33,7 @@ int CharToArrIdx(char c)
     return -1;
 }
 
-void PrintLetter(Letter *letter)
+void PrintLetter(struct Letter *letter)
 {
   int j;
 
@@ -53,7 +53,7 @@ void PrintLetter(Letter *letter)
   };
 }
 
-void InitializeLetter(Letter *letter)
+void InitializeLetter(struct Letter *letter)
 {
   letter->codes = malloc(sizeof(int));
   letter->codes[0] = 0;
@@ -61,7 +61,7 @@ void InitializeLetter(Letter *letter)
   letter->mem_size = 1;
 }
 
-void InitializeLetters(Letter *letters)
+void InitializeLetters(struct Letter *letters)
 {
   memset(letters, 0, sizeof(*letters));
   for (int i = 0; i < NUM_OF_CHARS; i++)
@@ -72,7 +72,7 @@ void InitializeLetters(Letter *letters)
 
 int main(void)
 {
-  Letter *letters = malloc(sizeof(Letter) * (NUM_OF_CHARS));
+  struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
 
   InitializeLetters(letters);
 
