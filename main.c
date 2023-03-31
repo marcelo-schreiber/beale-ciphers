@@ -5,7 +5,7 @@
 
 typedef struct Letter
 {
-  int *codes;
+  unsigned int *codes;
   unsigned int size;
   unsigned int mem_size;
 } Letter;
@@ -40,13 +40,12 @@ void PrintLetter(Letter *letter)
   for (int i = 0; i < NUM_OF_CHARS; i++)
   {
     j = 0;
-    int size = letter[i].size;
-    if (size == 0)
+    if (letter[i].size == 0)
       continue;
 
     printf("\n%c:", ArrIdxToChar(i));
 
-    while (j < size)
+    while (j < letter[i].size)
     {
       printf(" %d ", letter[i].codes[j]);
       j++;
