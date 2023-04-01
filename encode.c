@@ -60,7 +60,7 @@ void initializeMultipleLetters(struct Letter *letters, int size)
     initializeLetter(&letters[i]);
 }
 
-void generateLetters(struct Letter *letters, FILE *fp)
+void encodeGenerateLetters(struct Letter *letters, FILE *fp)
 {
   int word_idx = 0;
   char *word = malloc(sizeof(char) * MAX_WORD_SIZE);
@@ -99,7 +99,6 @@ void generateLetters(struct Letter *letters, FILE *fp)
   // realloc to the exact size
   for (int i = 0; i < NUM_OF_CHARS; i++)
   {
-
     letters[i].mem_size = letters[i].size;
     if (letters[i].size == 0)
     {

@@ -18,7 +18,7 @@ int main(void)
     return 1;
   }
 
-  generateLetters(letters, fp);
+  encodeGenerateLetters(letters, fp);
 
   printLetter(letters);
 
