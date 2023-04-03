@@ -26,7 +26,7 @@ int main(void)
 
   const char *numbers_cypher = decodeGenerateNumbers(fp);
 
-  printLetter(letters);
+  encodeGenerateFileLettersStringEncoded(letters, "coded.txt", "Hej");
 
   // printf("asdjfkl: %s", numbers_cypher);
 

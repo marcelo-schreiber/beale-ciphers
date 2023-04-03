@@ -90,3 +90,58 @@ void encodeGenerateLetters(struct Letter *letters, FILE *fp)
     letters[i].codes = realloc(letters[i].codes, sizeof(int) * letters[i].size);
   }
 }
+
+void encodeGenerateFileLetters(struct Letter *letter, char *filename)
+{
+  int j;
+
+  FILE *fp = fopen(filename, "w");
+
+  if (fp == NULL)
+  {
+    printf("Error opening file");
+    exit(1);
+  }
+
+  for (int i = 0; i < NUM_OF_CHARS; i++)
+  {
+    j = 0;
+    if (letter[i].size == 0)
+      continue;
+
+    fprintf(fp, "\n%c:", arrIdxToChar(i));
+
+    while (j < letter[i].size)
+    {
+      fprintf(fp, " %d ", letter[i].codes[j]);
+      j++;
+    }
+  };
+
+  fclose(fp);
+}
+
+void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *filename, char *message_to_be_encoded)
+{
+
+  FILE *fp = fopen(filename, "w");
+
+  if (fp == NULL)
+  {
+    printf("Error opening file");
+    exit(1);
+  }
+
+  for (int i = 0; i < strlen(message_to_be_encoded); i++)
+  {
+    if (message_to_be_encoded[i] == -1)
+      fprintf(fp, " ");
+
+    if (letter[i].size == 0)
+      continue;
+
+    fprintf(fp, "%d ", arrIdxToChar(letter[i].codes[0]));
+  };
+
+  fclose(fp);
+}
