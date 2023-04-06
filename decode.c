@@ -7,7 +7,7 @@
 #include "utils.h"
 
 // read the file of numbers and generate the letters
-const char *decodeGenerateNumbers(FILE *fp)
+char *decodeGenerateNumbers(FILE *fp)
 {
   char *numbers_cypher = malloc(sizeof(char) * 2);
   numbers_cypher[0] = ' ';
@@ -55,4 +55,39 @@ const char *decodeGenerateNumbers(FILE *fp)
   free(word);
 
   return numbers_cypher;
+}
+
+void decodeGenerateFileUsingCodesKeys(char *numbers_cypher, const char *filename, FILE *encoded_message_file)
+{
+  // -1 is space
+
+  FILE *fp = fopen(filename, "w");
+
+  if (fp == NULL)
+  {
+    printf("Error opening file");
+    exit(1);
+  }
+
+  int number;
+
+  while (fscanf(encoded_message_file, "%d", &number) != EOF)
+  {
+    if (number == -1)
+      fprintf(fp, " ");
+    else
+      fprintf(fp, "%c", numbers_cypher[number]);
+  }
+
+  fclose(fp);
+}
+
+void decodeGenerateFileUsingCypherBook(FILE *cypher_book, const char *filename, FILE *encoded_message_file)
+{
+
+  char *numbers_cypher = decodeGenerateNumbers(cypher_book);
+
+  decodeGenerateFileUsingCodesKeys(numbers_cypher, filename, encoded_message_file);
+
+  free(numbers_cypher);
 }

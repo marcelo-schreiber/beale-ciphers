@@ -9,11 +9,11 @@ int main(void)
 {
   struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
   initializeMultipleLetters(letters, NUM_OF_CHARS);
-
   // read file and store first character of each letter
   FILE *fp = fopen("words.txt", "r");
+  FILE *encoded = fopen("numbers.txt", "r");
 
-  if (fp == NULL)
+  if (fp == NULL || encoded == NULL)
   {
     printf("Error opening file");
     return 1;
@@ -24,11 +24,11 @@ int main(void)
   // reset pointer to initial of the file
   rewind(fp);
 
-  const char *numbers_cypher = decodeGenerateNumbers(fp);
-
+  char *numbers_cypher = decodeGenerateNumbers(fp);
+  printf("cp: %s\n\n", numbers_cypher);
   encodeGenerateFileLettersStringEncoded(letters, "coded.txt", "Hej");
-
-  // printf("asdjfkl: %s", numbers_cypher);
+  rewind(fp);
+  decodeGenerateFileUsingCypherBook(fp, "decoded2.txt", encoded);
 
   for (int i = 0; i < NUM_OF_CHARS; i++)
     free(letters[i].codes);
@@ -37,6 +37,7 @@ int main(void)
   free((char *)numbers_cypher);
 
   fclose(fp);
+  fclose(encoded);
 
   return 0;
 }
