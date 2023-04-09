@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "linkedList.h"
 struct Letter
 {
-  unsigned int *codes;
+  LinkedList *codes;
   unsigned int size;
-  unsigned int mem_size;
 };
 
 void printLetter(struct Letter *letter);
