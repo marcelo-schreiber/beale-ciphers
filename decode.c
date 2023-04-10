@@ -57,10 +57,54 @@ char *decodeGenerateNumbers(FILE *fp)
   return numbers_cypher;
 }
 
+char *decodeGenerateNumbersUsingCodesKeys(const char *filename)
+{
+  FILE *keyvalue_fp = fopen(filename, "r");
+
+  if (keyvalue_fp == NULL)
+  {
+    printf("Error opening file");
+    exit(1);
+  }
+
+  // a: 15 31 35 48 59 63 65 72 85 89
+  // c: 10 32 41 42 68 70 79
+  // d: 7 18 20 33 36 46 56 58 61 64 67 80 83 86
+  // e: 0 37 40 51 53 62 77 96
+  // f: 6 17 24 25 28 69
+  // i: 3 30 47 88
+  // o: 2 13 22 39 93 98
+  // 1: 1 38
+  // ...
+
+  // transform into
+  // 0: e
+  // 1: 1
+  // 2: o
+  // ...
+
+  char *numbers_cypher = malloc(sizeof(char) * 2);
+  numbers_cypher[0] = ' ';
+  numbers_cypher[1] = '\0';
+
+  if (numbers_cypher == NULL)
+  {
+    printf("Error allocating memory");
+    exit(1);
+  }
+
+  int word_idx = 0;
+  char *word = malloc(sizeof(char) * 256);
+
+  if (word == NULL)
+  {
+    printf("Error allocating memory");
+    exit(1);
+  }
+}
+
 void decodeGenerateFileUsingCodesKeys(char *numbers_cypher, const char *filename, FILE *encoded_message_file)
 {
-  // -1 is space
-
   FILE *fp = fopen(filename, "w");
 
   if (fp == NULL)
