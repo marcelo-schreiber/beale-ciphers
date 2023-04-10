@@ -7,9 +7,6 @@
 
 int main(void)
 {
-  struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
-  initializeMultipleLetters(letters, NUM_OF_CHARS);
-  // read file and store first character of each letter
   FILE *book_cypher = fopen("words.txt", "r");
 
   if (book_cypher == NULL)
@@ -17,6 +14,16 @@ int main(void)
     printf("Error opening file");
     return 1;
   }
+
+  struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
+
+  if (letters == NULL)
+  {
+    printf("Error allocating memory");
+    return 1;
+  }
+
+  initializeMultipleLetters(letters, NUM_OF_CHARS);
 
   encodeGenerateLetters(letters, book_cypher);
   encodeGenerateFileLetters(letters, "keyvalues.txt");
