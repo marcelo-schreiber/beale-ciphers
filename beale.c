@@ -7,35 +7,38 @@
 
 int main(void)
 {
-  FILE *book_cypher = fopen("words.txt", "r");
+  // FILE *book_cypher = fopen("words.txt", "r");
 
-  if (book_cypher == NULL)
-  {
-    printf("Error opening file");
-    return 1;
-  }
+  // if (book_cypher == NULL)
+  // {
+  //   printf("Error opening file");
+  //   return 1;
+  // }
 
-  struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
+  // struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
 
-  if (letters == NULL)
-  {
-    printf("Error allocating memory");
-    return 1;
-  }
+  // if (letters == NULL)
+  // {
+  //   printf("Error allocating memory");
+  //   return 1;
+  // }
 
-  initializeMultipleLetters(letters, NUM_OF_CHARS);
+  // initializeMultipleLetters(letters, NUM_OF_CHARS);
 
-  encodeGenerateLetters(letters, book_cypher);
-  encodeGenerateFileLetters(letters, "keyvalues.txt");
-  encodeGenerateFileLettersStringEncoded(letters, "encoded.txt", "Hello World");
+  // encodeGenerateLetters(letters, book_cypher);
+  // // encodeGenerateFileLetters(letters, "keyvalues.txt");
+  // // encodeGenerateFileLettersStringEncoded(letters, "encoded.txt", "Hello World");
 
-  printLetter(letters);
+  // // printLetter(letters);
 
-  encodeFreePointersFromLetters(letters);
+  // // encodeFreePointersFromLetters(letters);
 
-  free(letters);
+  // free(letters);
 
-  fclose(book_cypher);
-
+  char *numbers = decodeGenerateNumbersUsingCodeskeys("keyvalues.txt");
+  // char *numbers2 = decodeGenerateNumbers(book_cypher);
+  printf("%s\n", numbers);
+  // printf("%s\n", numbers2);
+  free(numbers);
   return 0;
 }
