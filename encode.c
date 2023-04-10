@@ -6,7 +6,7 @@
 #include "encode.h"
 #include "utils.h"
 
-void freePointersFromLetter(struct Letter *letter)
+void encodeFreePointersFromLetters(struct Letter *letter)
 {
   for (int i = 0; i < NUM_OF_CHARS; i++)
     clearLinkedList(letter[i].codes);

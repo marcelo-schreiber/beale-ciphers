@@ -14,4 +14,4 @@ void initializeMultipleLetters(struct Letter *letters, int size);
 void encodeGenerateLetters(struct Letter *letters, FILE *fp);
 void encodeGenerateFileLetters(struct Letter *letters, char *filename);
 void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *filename, char *message_to_be_encoded);
-void freePointersFromLetter(struct Letter *letter);
+void encodeFreePointersFromLetters(struct Letter *letter);

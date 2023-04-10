@@ -10,25 +10,25 @@ int main(void)
   struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
   initializeMultipleLetters(letters, NUM_OF_CHARS);
   // read file and store first character of each letter
-  FILE *fp = fopen("words.txt", "r");
+  FILE *book_cypher = fopen("words.txt", "r");
 
-  if (fp == NULL)
+  if (book_cypher == NULL)
   {
     printf("Error opening file");
     return 1;
   }
 
-  encodeGenerateLetters(letters, fp);
+  encodeGenerateLetters(letters, book_cypher);
   encodeGenerateFileLetters(letters, "keyvalues.txt");
   encodeGenerateFileLettersStringEncoded(letters, "encoded.txt", "Hello World");
 
   printLetter(letters);
 
-  freePointersFromLetter(letters);
+  encodeFreePointersFromLetters(letters);
 
   free(letters);
 
-  fclose(fp);
+  fclose(book_cypher);
 
   return 0;
 }
