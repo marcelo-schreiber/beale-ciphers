@@ -17,3 +17,4 @@ void addLinkedList(LinkedList *list, unsigned int data);
 void removeLinkedList(LinkedList *list, unsigned int data);
 void printLinkedList(LinkedList *list);
 void printLinkedListInFile(LinkedList *list, FILE *fp, char index);
+void clearLinkedList(LinkedList *list);

@@ -6,6 +6,12 @@
 #include "encode.h"
 #include "utils.h"
 
+void freePointersFromLetter(struct Letter *letter)
+{
+  for (int i = 0; i < NUM_OF_CHARS; i++)
+    clearLinkedList(letter[i].codes);
+}
+
 void printLetter(struct Letter *letter)
 {
   for (int i = 0; i < NUM_OF_CHARS; i++)

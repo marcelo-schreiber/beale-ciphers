@@ -75,3 +75,23 @@ void printLinkedListInFile(LinkedList *list, FILE *fp, char index)
   }
   fprintf(fp, "\n");
 };
+
+void clearLinkedList(LinkedList *list)
+{
+  Node *current = list->head;
+  Node *next = NULL;
+
+  while (current != NULL)
+  {
+    next = current->next;
+    free(current);
+    current = next;
+  }
+  list->head = NULL;
+  list->tail = NULL;
+  list->size = 0;
+
+  free(list->head);
+  free(list->tail);
+  free(list);
+};

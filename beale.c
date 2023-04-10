@@ -5,26 +5,6 @@
 #include "decode.h"
 #include "utils.h"
 
-void clearLinkedList(LinkedList *list)
-{
-  Node *current = list->head;
-  Node *next = NULL;
-
-  while (current != NULL)
-  {
-    next = current->next;
-    free(current);
-    current = next;
-  }
-  list->head = NULL;
-  list->tail = NULL;
-  list->size = 0;
-
-  free(list->head);
-  free(list->tail);
-  free(list);
-};
-
 int main(void)
 {
   struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
@@ -44,10 +24,7 @@ int main(void)
 
   printLetter(letters);
 
-  for (int i = 0; i < NUM_OF_CHARS; i++)
-  {
-    clearLinkedList(letters[i].codes);
-  }
+  freePointersFromLetter(letters);
 
   free(letters);
 
