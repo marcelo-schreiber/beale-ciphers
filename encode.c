@@ -108,7 +108,14 @@ void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *filenam
     if (first_char_idx == -1) // if first character is not a letter or number
       continue;
 
-    fprintf(fp, "%d ", letter[first_char_idx].codes->head->data);
+    Node *node = letter[first_char_idx].codes->head;
+    unsigned int size = letter[first_char_idx].codes->size;
+
+    for (int j = 0; j < rand()%size; j++)
+      node = node->next;
+
+
+    fprintf(fp, "%d ", node->data);
   };
 
   fclose(fp);
