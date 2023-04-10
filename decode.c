@@ -121,7 +121,7 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
 
   char line[255];
   int biggest_num = -1;
-  char *token = malloc(sizeof(char) * 10);
+  char *token;
 
   while (fgets(line, 255, fp) != NULL)
   {
@@ -146,8 +146,9 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
 
       if (number > biggest_num)
       {
-        numbers_cypher = realloc(numbers_cypher, sizeof(char) * (number + 1));
         biggest_num = number;
+        numbers_cypher = realloc(numbers_cypher, sizeof(char) * (biggest_num + 2));
+
         if (numbers_cypher == NULL)
         {
           printf("Error allocating memory");
@@ -163,7 +164,6 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
 
   numbers_cypher[biggest_num + 1] = '\0';
 
-  free(token);
   fclose(fp);
 
   return numbers_cypher;
