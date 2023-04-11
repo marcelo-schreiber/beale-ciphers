@@ -171,10 +171,51 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
 
 void decodeGenerateFileUsingCypherBook(FILE *cypher_book, const char *filename, FILE *encoded_message_file)
 {
-
   char *numbers_cypher = decodeGenerateNumbers(cypher_book);
 
   decodeGenerateFileUsingCodesKeys(numbers_cypher, filename, encoded_message_file);
 
   free(numbers_cypher);
+}
+
+void decodeByKeys(char *encoded_message_filename, char *keys_filename, char *decoded_message_filename)
+{
+  FILE *encoded_message_file = fopen(encoded_message_filename, "r");
+
+  if (encoded_message_file == NULL)
+  {
+    printf("Error opening file");
+    exit(1);
+  }
+
+  char *numbers = decodeGenerateNumbersUsingCodeskeys(keys_filename);
+
+  decodeGenerateFileUsingCodesKeys(numbers, decoded_message_filename, encoded_message_file);
+
+  fclose(encoded_message_file);
+  free(numbers);
+}
+
+void decodeByBook(char *encoded_message_filename, char *book_filename, char *decoded_message_filename)
+{
+  FILE *encoded_message_file = fopen(encoded_message_filename, "r");
+
+  if (encoded_message_file == NULL)
+  {
+    printf("Error opening file");
+    exit(1);
+  }
+
+  FILE *book_file = fopen(book_filename, "r");
+
+  if (book_file == NULL)
+  {
+    printf("Error opening file");
+    exit(1);
+  }
+
+  decodeGenerateFileUsingCypherBook(book_file, decoded_message_filename, encoded_message_file);
+
+  fclose(encoded_message_file);
+  fclose(book_file);
 }

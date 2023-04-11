@@ -19,6 +19,8 @@ void printLetter(struct Letter *letter)
     if (letter[i].codes->size == 0)
       continue;
 
+    printf("%d", letter[i].codes->size);
+
     printf("\n%c: ", arrIdxToChar(i));
 
     printLinkedList(letter[i].codes);
@@ -34,6 +36,7 @@ void initializeLetter(struct Letter *letter)
 
 void initializeMultipleLetters(struct Letter *letters, int size)
 {
+  // memset(letters, 0, sizeof(struct Letter) * size);
   for (int i = 0; i < size; i++)
     initializeLetter(&letters[i]);
 }
@@ -85,25 +88,28 @@ void encodeGenerateFileLetters(struct Letter *letter, char *filename)
   fclose(fp);
 }
 
-void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *filename, char *message_to_be_encoded)
+void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *encoded_message, char *filename_with_message_to_be_encoded)
 {
-  FILE *fp = fopen(filename, "w");
+  FILE *fp = fopen(encoded_message, "w");
+  FILE *fp_message = fopen(filename_with_message_to_be_encoded, "r");
 
-  if (fp == NULL)
+  if (fp == NULL || fp_message == NULL)
   {
     printf("Error opening file");
     exit(1);
   }
 
-  for (int i = 0; i < strlen(message_to_be_encoded); i++)
+  char ch;
+
+  while ((ch = fgetc(fp_message)) != EOF)
   {
-    if (message_to_be_encoded[i] == ' ')
+    if (ch == ' ')
     {
       fprintf(fp, "%d ", -1);
       continue;
     }
 
-    const int first_char_idx = charToArrIdx(tolower(message_to_be_encoded[i]));
+    const int first_char_idx = charToArrIdx(tolower(ch));
 
     if (first_char_idx == -1) // if first character is not a letter or number
       continue;
@@ -111,12 +117,44 @@ void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *filenam
     Node *node = letter[first_char_idx].codes->head;
     unsigned int size = letter[first_char_idx].codes->size;
 
-    for (int j = 0; j < rand()%size; j++)
-      node = node->next;
+    if (size == 0)
+      continue;
 
+    for (int j = 0; j < rand() % size; j++)
+      node = node->next;
 
     fprintf(fp, "%d ", node->data);
   };
 
   fclose(fp);
 }
+
+// this segfaults at this file somehow!
+
+// void encodeBySomeThing(char *book_filename, char *message_filename, char *encoded_message_filename, char *keys_filename)
+// {
+//   FILE *book_cypher = fopen("LivroCifra.txt", "r");
+//   // encode("LivroCifra.txt", "MensagemOriginal.txt", "MensagemCodificada.txt", "keyvalues.txt");
+//   if (book_cypher == NULL)
+//   {
+//     printf("Error opening file");
+//     exit(1);
+//   }
+
+//   struct Letter *letters = malloc(sizeof(struct Letter) * NUM_OF_CHARS);
+
+//   if (letters == NULL)
+//   {
+//     printf("Error allocating memory");
+//     exit(1);
+//   }
+//   initializeMultipleLetters(letters, NUM_OF_CHARS);
+
+//   encodeGenerateLetters(letters, book_cypher);
+//   encodeGenerateFileLetters(letters, "keyvalues.txt");
+//   encodeGenerateFileLettersStringEncoded(letters, "MensagemCodificada.txt", "MensagemOriginal.txt");
+
+//   encodeFreePointersFromLetters(letters);
+//   free(letters);
+//   fclose(book_cypher);
+// };

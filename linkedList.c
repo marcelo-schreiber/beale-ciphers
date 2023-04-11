@@ -6,7 +6,6 @@
 
 void initializeLinkedList(LinkedList *list)
 {
-  memset(list, 0, sizeof(*list));
   list->head = NULL;
   list->tail = NULL;
   list->size = 0;
