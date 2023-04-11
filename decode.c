@@ -28,9 +28,13 @@ char *decodeGenerateNumbers(FILE *fp)
     exit(1);
   }
 
-  while (fscanf(fp, " %255s", word) != EOF)
+  while (fscanf(fp, " %s", word) != EOF)
   {
     char first_char = (tolower(word[0]));
+
+    // if is not a letter or number, skip
+    if (!isalpha(first_char) && !isdigit(first_char))
+      continue;
 
     if (strlen(numbers_cypher) <= word_idx)
     {
@@ -70,9 +74,9 @@ void decodeGenerateFileUsingCodesKeys(char *numbers_cypher, const char *filename
   }
 
   int number;
-
   while (fscanf(encoded_message_file, "%d", &number) != EOF)
   {
+
     if (number == -1)
       fprintf(fp, " ");
     else
@@ -119,11 +123,11 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
 
   char letter;
 
-  char line[255];
-  int biggest_num = -1;
+  char line[10000];
+  int biggest_num = -2;
   char *token;
 
-  while (fgets(line, 255, fp) != NULL)
+  while (fgets(line, 10000, fp) != NULL)
   {
     letter = line[0];
     token = strtok(line, " ");
