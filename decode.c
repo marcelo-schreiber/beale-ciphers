@@ -9,7 +9,10 @@
 // read the file of numbers and generate the letters
 char *decodeGenerateNumbers(FILE *fp)
 {
-  char *numbers_cypher = malloc(sizeof(char) * 2);
+  unsigned int array_size = 2;
+  char *numbers_cypher = malloc(sizeof(char) * array_size);
+  int word_idx = 0;
+  char *word = malloc(sizeof(char) * 256);
   numbers_cypher[0] = ' ';
   numbers_cypher[1] = '\0';
 
@@ -18,9 +21,6 @@ char *decodeGenerateNumbers(FILE *fp)
     printf("Error allocating memory");
     exit(1);
   }
-
-  int word_idx = 0;
-  char *word = malloc(sizeof(char) * 256);
 
   if (word == NULL)
   {
@@ -36,9 +36,10 @@ char *decodeGenerateNumbers(FILE *fp)
     if (!isalpha(first_char) && !isdigit(first_char))
       continue;
 
-    if (strlen(numbers_cypher) <= word_idx)
+    if (array_size <= word_idx)
     {
-      numbers_cypher = realloc(numbers_cypher, sizeof(char) * ((word_idx << 1) + 1)); // double the size
+      array_size <<= 1;
+      numbers_cypher = realloc(numbers_cypher, sizeof(char) * array_size); // double the size
       if (numbers_cypher == NULL)
       {
         printf("Error allocating memory");
@@ -47,7 +48,6 @@ char *decodeGenerateNumbers(FILE *fp)
     }
 
     numbers_cypher[word_idx] = first_char;
-    numbers_cypher[word_idx + 1] = '\0'; // add null terminator
 
     word_idx++;
   }
