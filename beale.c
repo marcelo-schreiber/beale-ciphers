@@ -16,36 +16,6 @@ Decodificar uma mensagem, usando um arquivo de códigos
 Decodificar uma mensagem usando o livro cifra
 ./beale -d -i MensagemCodificada -b LivroCifra -o MensagemDecodificada
 */
-void encode(char *book_filename, char *message_filename, char *encoded_message_filename, char *keys_filename)
-{
-  FILE *book_cypher = fopen(book_filename, "r");
-
-  if (book_cypher == NULL)
-  {
-    printf("Error opening file");
-    exit(1);
-  }
-
-  struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
-
-  if (letters == NULL)
-  {
-    printf("Error allocating memory");
-    exit(1);
-  }
-
-  initializeMultipleLetters(letters, NUM_OF_CHARS);
-
-  encodeGenerateLetters(letters, book_cypher);
-  encodeGenerateFileLetters(letters, keys_filename);
-  encodeGenerateFileLettersStringEncoded(letters, encoded_message_filename, message_filename);
-
-  encodeFreePointersFromLetters(letters);
-
-  free(letters);
-  fclose(book_cypher);
-}
-
 int main(int argc, char *argv[])
 {
   encode("LivroCifra.txt", "MensagemOriginal.txt", "MensagemCodificada.txt", "ArquivoDeChaves.txt");

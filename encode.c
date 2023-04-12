@@ -129,6 +129,36 @@ void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *encoded
   fclose(fp);
 }
 
+void encode(char *book_filename, char *message_filename, char *encoded_message_filename, char *keys_filename)
+{
+  FILE *book_cypher = fopen(book_filename, "r");
+
+  if (book_cypher == NULL)
+  {
+    printf("Error opening file");
+    exit(1);
+  }
+
+  struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
+
+  if (letters == NULL)
+  {
+    printf("Error allocating memory");
+    exit(1);
+  }
+
+  initializeMultipleLetters(letters, NUM_OF_CHARS);
+
+  encodeGenerateLetters(letters, book_cypher);
+  encodeGenerateFileLetters(letters, keys_filename);
+  encodeGenerateFileLettersStringEncoded(letters, encoded_message_filename, message_filename);
+
+  encodeFreePointersFromLetters(letters);
+
+  free(letters);
+  fclose(book_cypher);
+}
+
 // this segfaults at this file somehow!
 
 // void encodeBySomeThing(char *book_filename, char *message_filename, char *encoded_message_filename, char *keys_filename)
