@@ -21,31 +21,4 @@ int main(int argc, char *argv[])
   encode("LivroCifra.txt", "MensagemOriginal.txt", "MensagemCodificada.txt", "ArquivoDeChaves.txt");
   decodeByBook("MensagemCodificada.txt", "LivroCifra.txt", "MensagemDecodificada.txt");
   decodeByKeys("MensagemCodificada.txt", "ArquivoDeChaves.txt", "MensagemDecodificada2.txt");
-  // FILE *book_cypher = fopen("LivroCifra.txt", "r");
-
-  // if (book_cypher == NULL)
-  // {
-  //   printf("Error opening file");
-  //   return 1;
-  // }
-
-  // struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
-
-  // if (letters == NULL)
-  // {
-  //   printf("Error allocating memory");
-  //   return 1;
-  // }
-
-  // initializeMultipleLetters(letters, NUM_OF_CHARS);
-
-  // encodeGenerateLetters(letters, book_cypher);
-  // printLetter(letters);
-  // encodeGenerateFileLetters(letters, "keyvalues.txt");
-  // encodeGenerateFileLettersStringEncoded(letters, "MensagemCodificada.txt", "MensagemOriginal.txt");
-
-  // encodeFreePointersFromLetters(letters);
-
-  // free(letters);
-  // fclose(book_cypher);
 }
