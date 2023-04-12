@@ -148,10 +148,10 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
 
       int number = atoi(token);
 
-      if (number > biggest_num)
+      if (number >= biggest_num)
       {
-        biggest_num = number;
-        numbers_cypher = realloc(numbers_cypher, sizeof(char) * (biggest_num + 2));
+        biggest_num = number + 128;
+        numbers_cypher = realloc(numbers_cypher, sizeof(char) * biggest_num);
 
         if (numbers_cypher == NULL)
         {
@@ -165,6 +165,16 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
       token = strtok(NULL, " ");
     }
   }
+
+  biggest_num -= 128;
+
+  if (biggest_num < 1) // if there is no numbers
+  {
+    printf("Error: no numbers in the file");
+    exit(1);
+  }
+
+  numbers_cypher = realloc(numbers_cypher, sizeof(char) * (biggest_num + 2));
 
   numbers_cypher[biggest_num + 1] = '\0';
 
