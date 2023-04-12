@@ -168,6 +168,7 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
 
   numbers_cypher[biggest_num + 1] = '\0';
 
+  free(token);
   fclose(fp);
 
   return numbers_cypher;

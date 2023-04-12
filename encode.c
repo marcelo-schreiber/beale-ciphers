@@ -127,6 +127,7 @@ void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *encoded
   };
 
   fclose(fp);
+  fclose(fp_message);
 }
 
 void encode(char *book_filename, char *message_filename, char *encoded_message_filename, char *keys_filename)
