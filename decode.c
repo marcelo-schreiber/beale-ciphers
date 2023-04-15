@@ -6,6 +6,8 @@
 #include "decode.h"
 #include "utils.h"
 
+#define REALLOC_SIZE_OFFSET 1024
+
 // read the file of numbers and generate the letters
 char *decodeGenerateNumbers(FILE *fp)
 {
@@ -150,7 +152,7 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
 
       if (number >= biggest_num)
       {
-        biggest_num = number + 128;
+        biggest_num = number + REALLOC_SIZE_OFFSET;
         numbers_cypher = realloc(numbers_cypher, sizeof(char) * biggest_num);
 
         if (numbers_cypher == NULL)
@@ -166,7 +168,7 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
     }
   }
 
-  biggest_num -= 128;
+  biggest_num -= REALLOC_SIZE_OFFSET;
 
   if (biggest_num < 1) // if there is no numbers
   {
