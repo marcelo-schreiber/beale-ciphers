@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "utils.h"
+#include "../include/utils.h"
 
 char arrIdxToChar(int code)
 {

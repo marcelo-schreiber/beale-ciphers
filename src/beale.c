@@ -3,9 +3,9 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "encode.h"
-#include "decode.h"
-#include "utils.h"
+#include "../include/encode.h"
+#include "../include/decode.h"
+#include "../include/utils.h"
 
 /* Codificar uma mensagem qualquer contida em um arquivo ASCII usando um livro cifra. O programa deve ter uma opção de salvar em um arquivo texto as chaves geradas no formato descrito anteriormente. A linha de execução do programa dever ser a seguinte:
 

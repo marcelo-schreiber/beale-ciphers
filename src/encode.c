@@ -3,8 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "encode.h"
-#include "utils.h"
+#include "../include/encode.h"
+#include "../include/utils.h"
 
 void encodeFreePointersFromLetters(struct Letter *letter)
 {
@@ -120,7 +120,7 @@ void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *encoded
     if (size == 0)
       continue;
 
-    for (int j = 0; j < rand() % size; j++)
+    for (unsigned int j = 0; j < rand() % size; j++)
       node = node->next;
 
     fprintf(fp, "%d ", node->data);

@@ -3,8 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "decode.h"
-#include "utils.h"
+#include "../include/decode.h"
+#include "../include/utils.h"
 
 #define REALLOC_SIZE_OFFSET 1024
 
@@ -13,7 +13,7 @@ char *decodeGenerateNumbers(FILE *fp)
 {
   unsigned int array_size = 2;
   char *numbers_cypher = malloc(sizeof(char) * array_size);
-  int word_idx = 0;
+  unsigned int word_idx = 0;
   char *word = malloc(sizeof(char) * 256);
   numbers_cypher[0] = ' ';
   numbers_cypher[1] = '\0';

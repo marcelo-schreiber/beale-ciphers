@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "linkedList.h"
+#include "../include/linkedList.h"
 
 void initializeLinkedList(LinkedList *list)
 {
@@ -10,6 +10,7 @@ void initializeLinkedList(LinkedList *list)
   list->tail = NULL;
   list->size = 0;
 };
+
 void addLinkedList(LinkedList *list, unsigned int data)
 {
   Node *newNode = malloc(sizeof(Node));
