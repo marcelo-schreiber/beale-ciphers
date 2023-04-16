@@ -19,15 +19,13 @@ Decodificar uma mensagem usando o livro cifra
 // TODO: trocar fgets por fscanf para gerar arquivo chave (encode.c)
 int main(int argc, char *argv[])
 {
-  int opt;
-
-  int encode = 0;
-  int decode = 0;
-  int book = 0;
-  int message = 0;
-  int input = 0;
-  int key = 0;
-  int output = 0;
+  int has_encode = 0;
+  int has_decode = 0;
+  int has_book = 0;
+  int has_message = 0;
+  int has_input = 0;
+  int has_key = 0;
+  int has_output = 0;
 
   char *book_path = NULL;
   char *message_path = NULL;
@@ -35,56 +33,62 @@ int main(int argc, char *argv[])
   char *key_path = NULL;
   char *output_path = NULL;
 
+  int opt;
   while ((opt = getopt(argc, argv, "edb:m:i:o:c:")) != -1)
   {
     switch (opt)
     {
     case 'e':
-      encode = 1;
+      has_encode = 1;
       break;
     case 'd':
-      decode = 1;
+      has_decode = 1;
       break;
     case 'b':
-      book = 1;
+      has_book = 1;
       book_path = optarg;
       break;
     case 'm':
-      message = 1;
+      has_message = 1;
       message_path = optarg;
       break;
     case 'i':
-      input = 1;
+      has_input = 1;
       input_path = optarg;
       break;
     case 'c':
-      key = 1;
+      has_key = 1;
       key_path = optarg;
       break;
     case 'o':
-      output = 1;
+      has_output = 1;
       output_path = optarg;
       break;
     default:
-      fprintf(stderr, "Uso: %s [-e|-d] [-b book_path] [-m message_path] [-i input_path] [-c key_path] [-o output_path]", argv[0]);
+      //  ./beale  -e  -b LivroCifra -m MensagemOriginal -o MensagemCodificada -c ArquivoDeChaves
+      // ./beale  -d  -i MensagemCodificada  -c ArquivoDeChaves  -o MensagemDecodificada
+      // ./beale -d -i MensagemCodificada -b LivroCifra -o MensagemDecodificada
+      fprintf(stderr, "Uso: %s [-e] [-b] [-m] [-o] [-c] ou %s [-d] [-i] [-c] [-o] ou %s [-d] [-i] [-b] [-o] (com terminação de arquivos, Ex.: arq.txt ou arq.ascii)", argv[0], argv[0], argv[0]);
       exit(EXIT_FAILURE);
     }
   };
 
-  if (encode)
+  if (has_encode)
   {
-    if (!(book && message && output && key))
+    if (!(has_book && has_message && has_output && has_key))
     {
       fprintf(stderr, "Uso: %s -e -b book_path -m message_path -o output_path -c key_path", argv[0]);
       exit(EXIT_FAILURE);
     }
+
+    // TODO: verificar se os arquivos existem
     encodeByBook(book_path, message_path, output_path, key_path);
   }
-  else if (decode)
+  else if (has_decode)
   {
-    if (input && key && output)
+    if (has_input && has_key && has_output)
       decodeByKeys(input_path, key_path, output_path);
-    else if (input && book && output)
+    else if (has_input && has_book && has_output)
       decodeByBook(input_path, book_path, output_path);
     else
     {
@@ -94,7 +98,7 @@ int main(int argc, char *argv[])
   }
   else
   {
-    fprintf(stderr, "Uso: %s [-e] [-d] [-b book_path] [-m message_path] [-i input_path] [-c key_path] [-o output_path]", argv[0]);
+    fprintf(stderr, "Uso: %s [-e] [-b] [-m] [-o] [-c] ou %s [-d] [-i] [-c] [-o] ou %s [-d] [-i] [-b] [-o] (com terminação de arquivos, Ex.: arq.txt ou arq.ascii)", argv[0], argv[0], argv[0]);
     exit(EXIT_FAILURE);
   }
 }
