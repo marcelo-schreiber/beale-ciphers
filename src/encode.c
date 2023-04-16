@@ -49,7 +49,7 @@ void encodeGenerateLetters(struct Letter *letters, FILE *fp)
   if (word == NULL)
   {
     printf("Error allocating memory");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   while (fscanf(fp, " %255s", word) != EOF)
@@ -74,7 +74,7 @@ void encodeGenerateFileLetters(struct Letter *letter, char *filename)
   if (fp == NULL)
   {
     printf("Error opening file");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   for (int i = 0; i < NUM_OF_CHARS; i++)
@@ -96,7 +96,7 @@ void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *encoded
   if (fp == NULL || fp_message == NULL)
   {
     printf("Error opening file");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   char ch;
@@ -130,14 +130,14 @@ void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *encoded
   fclose(fp_message);
 }
 
-void encode(char *book_filename, char *message_filename, char *encoded_message_filename, char *keys_filename)
+void encodeByBook(char *book_filename, char *message_filename, char *encoded_message_filename, char *keys_filename)
 {
   FILE *book_cypher = fopen(book_filename, "r");
 
   if (book_cypher == NULL)
   {
     printf("Error opening file");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   struct Letter *letters = malloc(sizeof(struct Letter) * (NUM_OF_CHARS));
@@ -145,7 +145,7 @@ void encode(char *book_filename, char *message_filename, char *encoded_message_f
   if (letters == NULL)
   {
     printf("Error allocating memory");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   initializeMultipleLetters(letters, NUM_OF_CHARS);
@@ -159,33 +159,3 @@ void encode(char *book_filename, char *message_filename, char *encoded_message_f
   free(letters);
   fclose(book_cypher);
 }
-
-// this segfaults at this file somehow!
-
-// void encodeBySomeThing(char *book_filename, char *message_filename, char *encoded_message_filename, char *keys_filename)
-// {
-//   FILE *book_cypher = fopen("LivroCifra.txt", "r");
-//   // encode("LivroCifra.txt", "MensagemOriginal.txt", "MensagemCodificada.txt", "keyvalues.txt");
-//   if (book_cypher == NULL)
-//   {
-//     printf("Error opening file");
-//     exit(1);
-//   }
-
-//   struct Letter *letters = malloc(sizeof(struct Letter) * NUM_OF_CHARS);
-
-//   if (letters == NULL)
-//   {
-//     printf("Error allocating memory");
-//     exit(1);
-//   }
-//   initializeMultipleLetters(letters, NUM_OF_CHARS);
-
-//   encodeGenerateLetters(letters, book_cypher);
-//   encodeGenerateFileLetters(letters, "keyvalues.txt");
-//   encodeGenerateFileLettersStringEncoded(letters, "MensagemCodificada.txt", "MensagemOriginal.txt");
-
-//   encodeFreePointersFromLetters(letters);
-//   free(letters);
-//   fclose(book_cypher);
-// };

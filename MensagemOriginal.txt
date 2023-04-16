@@ -1,2 +1,1 @@
-Hello World is a simple program that prints the text “Hello World” to the screen. It is a good starting point for beginners because it is simple and easy to understand. It is also a good starting point for beginners because it is simple and easy to understand.
-But, what is a program? A program is a set of instructions that tells the computer what to do. The instructions are written in a programming language. The computer can only understand the instructions if they are written in a programming language that it understands. The computer can only understand the instructions if they are written in a programming language that it understands.
+5 pratos de trigo para 3 tigres tristes. 3 tigres tristes comem 3 pratos de trigo. Quantos pratos de trigo restam?

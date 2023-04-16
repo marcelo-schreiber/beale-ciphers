@@ -21,13 +21,13 @@ char *decodeGenerateNumbers(FILE *fp)
   if (numbers_cypher == NULL)
   {
     printf("Error allocating memory");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   if (word == NULL)
   {
     printf("Error allocating memory");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   while (fscanf(fp, " %s", word) != EOF)
@@ -45,7 +45,7 @@ char *decodeGenerateNumbers(FILE *fp)
       if (numbers_cypher == NULL)
       {
         printf("Error allocating memory");
-        exit(1);
+        exit(EXIT_FAILURE);
       }
     }
 
@@ -72,7 +72,7 @@ void decodeGenerateFileUsingCodesKeys(char *numbers_cypher, const char *filename
   if (fp == NULL)
   {
     printf("Error opening file");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   int number;
@@ -95,7 +95,7 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
   if (fp == NULL)
   {
     printf("Error opening file");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   // a: 15 31 35 48 59 63 65 72 85 89
@@ -120,7 +120,7 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
   if (numbers_cypher == NULL)
   {
     printf("Error allocating memory");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   char letter;
@@ -158,7 +158,7 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
         if (numbers_cypher == NULL)
         {
           printf("Error allocating memory");
-          exit(1);
+          exit(EXIT_FAILURE);
         }
       }
 
@@ -173,7 +173,7 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
   if (biggest_num < 1) // if there is no numbers
   {
     printf("Error: no numbers in the file");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   numbers_cypher = realloc(numbers_cypher, sizeof(char) * (biggest_num + 2));
@@ -202,7 +202,7 @@ void decodeByKeys(char *encoded_message_filename, char *keys_filename, char *dec
   if (encoded_message_file == NULL)
   {
     printf("Error opening file");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   char *numbers = decodeGenerateNumbersUsingCodeskeys(keys_filename);
@@ -220,7 +220,7 @@ void decodeByBook(char *encoded_message_filename, char *book_filename, char *dec
   if (encoded_message_file == NULL)
   {
     printf("Error opening file");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   FILE *book_file = fopen(book_filename, "r");
@@ -228,7 +228,7 @@ void decodeByBook(char *encoded_message_filename, char *book_filename, char *dec
   if (book_file == NULL)
   {
     printf("Error opening file");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   decodeGenerateFileUsingCypherBook(book_file, decoded_message_filename, encoded_message_file);

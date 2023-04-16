@@ -42,4 +42,7 @@ objFolder:
 clean:
 	$(RM) ./objects/*.o $(PROJ_NAME) *~
  
+purge: clean
+	$(RM) ./objects
+
 .PHONY: all clean
