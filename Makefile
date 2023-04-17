@@ -44,5 +44,16 @@ clean:
  
 purge: clean
 	$(RM) ./objects
+	
+# ./beale  -e  -b LivroCifra -m MensagemOriginal -o MensagemCodificada -c ArquivoDeChaves
+# ./beale  -d  -i MensagemCodificada  -c ArquivoDeChaves  -o MensagemDecodificada
+# ./beale -d -i MensagemCodificada -b LivroCifra -o MensagemDecodificada
+test:
+	./$(PROJ_NAME) -e -b LivroCifra.txt -m MensagemOriginal.txt -o MensagemCodificada.txt -c ArquivoDeChaves.txt
+	./$(PROJ_NAME) -d -i MensagemCodificada.txt -c ArquivoDeChaves.txt -o MensagemDecodificada.txt
+	./$(PROJ_NAME) -d -i MensagemCodificada.txt -b LivroCifra.txt -o MensagemDecodificada2.txt
+
+check:
+	diff MensagemOriginal.txt MensagemDecodificada.txt && diff MensagemOriginal.txt MensagemDecodificada2.txt
 
 .PHONY: all clean
