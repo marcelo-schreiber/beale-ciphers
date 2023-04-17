@@ -53,7 +53,9 @@ test:
 	./$(PROJ_NAME) -d -i MensagemCodificada.txt -c ArquivoDeChaves.txt -o MensagemDecodificada.txt
 	./$(PROJ_NAME) -d -i MensagemCodificada.txt -b LivroCifra.txt -o MensagemDecodificada2.txt
 
+# -w to ignore whitespaces
 check:
-	diff MensagemOriginal.txt MensagemDecodificada.txt && diff MensagemOriginal.txt MensagemDecodificada2.txt
+	diff -w MensagemOriginal.txt MensagemDecodificada.txt
+	diff -w MensagemOriginal.txt MensagemDecodificada2.txt
 
 .PHONY: all clean
