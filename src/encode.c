@@ -54,7 +54,7 @@ void encodeGenerateLetters(struct Letter *letters, FILE *fp)
 
   while (fscanf(fp, " %255s", word) != EOF)
   {
-    int first_char_idx = charToArrIdx(tolower(word[0]));
+    int first_char_idx = charToArrIdx((word[0]));
 
     if (first_char_idx == -1) // if first character is not a letter or number
       continue;
@@ -109,7 +109,12 @@ void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *encoded
       continue;
     }
 
-    const int first_char_idx = charToArrIdx(tolower(ch));
+    if (ch == '\n')
+    {
+      fprintf(fp, "%d ", -2);
+      continue;
+    }
+    const int first_char_idx = charToArrIdx((ch));
 
     if (first_char_idx == -1) // if first character is not a letter or number
       continue;

@@ -32,10 +32,9 @@ char *decodeGenerateNumbers(FILE *fp)
 
   while (fscanf(fp, " %s", word) != EOF)
   {
-    char first_char = (tolower(word[0]));
+    char first_char = word[0];
 
-    // if is not a letter or number, skip
-    if (!isalpha(first_char) && !isdigit(first_char))
+    if (charToArrIdx(first_char) == -1)
       continue;
 
     if (array_size <= word_idx)
@@ -81,6 +80,8 @@ void decodeGenerateFileUsingCodesKeys(char *numbers_cypher, const char *filename
 
     if (number == -1)
       fprintf(fp, " ");
+    else if (number == -2)
+      fprintf(fp, "\n");
     else
       fprintf(fp, "%c", numbers_cypher[number]);
   }
@@ -136,7 +137,6 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
 
     while (token != NULL)
     {
-
       if (strlen(token) == 2 && token[1] == ':')
       {
         token = strtok(NULL, " ");
@@ -152,8 +152,8 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
 
       if (number >= biggest_num)
       {
-        biggest_num = number + REALLOC_SIZE_OFFSET;
-        numbers_cypher = realloc(numbers_cypher, sizeof(char) * biggest_num);
+        biggest_num = number;
+        numbers_cypher = realloc(numbers_cypher, sizeof(char) * (biggest_num + 2));
 
         if (numbers_cypher == NULL)
         {
@@ -167,8 +167,6 @@ char *decodeGenerateNumbersUsingCodeskeys(const char *filename)
       token = strtok(NULL, " ");
     }
   }
-
-  biggest_num -= REALLOC_SIZE_OFFSET;
 
   if (biggest_num < 1) // if there is no numbers
   {
