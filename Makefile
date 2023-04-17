@@ -1,5 +1,3 @@
-# My third makefile
-
 # Name of the project
 PROJ_NAME=beale
 
@@ -19,7 +17,7 @@ CC=gcc
 CC_FLAGS=-c         \
          -W         \
          -Wall      \
-				 -std=c99   \
+		 -std=c99   \
 
 # Command used at clean target
 RM = rm -rf
