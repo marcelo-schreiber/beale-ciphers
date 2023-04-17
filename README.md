@@ -62,7 +62,7 @@ A estrutura de dados escolhida para armazenar as chaves de decodificação foi u
 
   ```  
   a b
-  a a b
+  aab
   ```
   
 3. Escrever a mensagem decodificada em um arquivo. 
