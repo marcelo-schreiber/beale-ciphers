@@ -6,6 +6,9 @@
 #include "../include/encode.h"
 #include "../include/utils.h"
 
+#define WHITESPACE_CHAR_ENCODED -1
+#define NEWLINE_CHAR_ENCODED -2
+
 void encodeFreePointersFromLetters(struct Letter *letter)
 {
   for (int i = 0; i < NUM_OF_CHARS; i++)
@@ -54,9 +57,9 @@ void encodeGenerateLetters(struct Letter *letters, FILE *fp)
 
   while (fscanf(fp, " %255s", word) != EOF)
   {
-    int first_char_idx = charToArrIdx((word[0]));
+    int first_char_idx = charToArrIdx(word[0]);
 
-    if (first_char_idx == -1) // if first character is not a letter or number
+    if (first_char_idx == -1) // if first character is not valid
       continue;
 
     // add to linked list at codes[first_char_idx]
@@ -105,18 +108,18 @@ void encodeGenerateFileLettersStringEncoded(struct Letter *letter, char *encoded
   {
     if (ch == ' ')
     {
-      fprintf(fp, "%d ", -1);
+      fprintf(fp, "%d ", WHITESPACE_CHAR_ENCODED);
       continue;
     }
 
     if (ch == '\n')
     {
-      fprintf(fp, "%d ", -2);
+      fprintf(fp, "%d ", NEWLINE_CHAR_ENCODED);
       continue;
     }
     const int first_char_idx = charToArrIdx((ch));
 
-    if (first_char_idx == -1) // if first character is not a letter or number
+    if (first_char_idx == -1) // if first character is not valid
       continue;
 
     Node *node = letter[first_char_idx].codes->head;
