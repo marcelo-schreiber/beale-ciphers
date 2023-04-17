@@ -6,6 +6,32 @@ re-use it under the terms of the Project Gutenberg License included
 with this eBook or online at www.gutenberg.org
 
 
+Let's write a tet that all words start with a ascii character from 33 to 126 (printable characters)
+0x21 to .0x7e
+Let's write a text that all words start with a ascii character from 33 to 126.
+
+"Summer is a great time to explore the outdoors and experience new adventures. @Whether you're hiking in the mountains or swimming in the ocean, there's always something exciting to discover.
+
+#But, with so many activities to choose from, it can be hard to decide what to do. $That's where a good guidebook comes in handy! %By providing detailed information and insider tips, a guidebook can help you plan the perfect summer adventure.
+
+&Of course, no summer adventure is complete without good company. *Whether you're traveling with friends, family, or loved ones, spending time with the people you care about can make all the difference.
+!Hello
+(And let's not forget about the food! )From juicy burgers to refreshing smoothies, summer is a time to indulge in your favorite treats. +And speaking of treats, have you ever tried eating ice cream with a fork? It's a game-changer!
+
+/So, whether you're exploring the great outdoors or indulging in your favorite foods, there's always something to look forward to in the summer. :With each day comes a new opportunity to create unforgettable memories and make the most of this special time of year.
+
+<In conclusion, embrace the summer spirit and make the most of all the exciting opportunities it has to offer. >Whether you're a thrill-seeker or a foodie, there's something for everyone to enjoy. ?So get out there and start exploring - you never know what adventures await!"
+"Summer is a great time to eplore the outdoors and eperience new adventures Whether you're hiking in the mountains or swimming in the ocean there's always something eciting to discover
+
+#But with so many activities to choose from it can be hard to decide what to do $That's where a good guidebook comes in handy By providing detailed information and insider tips a guidebook can help you plan the perfect summer adventure
+
+Of course no summer adventure is complete without good company *Whether you're traveling with friends family or loved ones spending time with the people you care about can make all the difference
+
+(And let's not forget about the food From juicy burgers to refreshing smoothies summer is a time to indulge in your favorite treats +And speaking of treats have you ever tried eating ice cream with a fork It's a game-changer
+
+So whether you're eploring the great outdoors or indulging in your favorite foods there's always something to look forward to in the summer With each day comes a new opportunity to create unforgettable memories and make the most of this special time of year
+In conclusion embrace the summer spirit and make the most of all the eciting opportunities it has to offer Whether you're a thrill-seeker or a foodie there's something for everyone to enjoy So get out there and start eploring - you never know what adventures await"
+
 Title: Cinco minutos
 
 Author: José Martiniano de Alencar
