@@ -14,9 +14,10 @@ OBJ=$(subst .c,.o,$(subst src,objects,$(C_SOURCE)))
 CC=gcc
 
 # Flags for compiler
-CC_FLAGS=-c         \
+CFLAGS=-c         \
          -W         \
          -Wall      \
+		 -I ./include \
 		 -std=c99   \
 
 # Command used at clean target
@@ -29,10 +30,10 @@ $(PROJ_NAME): $(OBJ)
 	$(CC) $^ -o $@ 
  
 ./objects/%.o: ./src/%.c ./include/%.h
-	$(CC) $< $(CC_FLAGS) -o $@
+	$(CC) $< $(CFLAGS) -o $@
  
 ./objects/beale.o: ./src/beale.c $(H_SOURCE)
-	$(CC) $< $(CC_FLAGS) -o $@
+	$(CC) $< $(CFLAGS) -o $@
  
 objFolder:
 	@mkdir -p objects

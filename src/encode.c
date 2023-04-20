@@ -3,8 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "../include/encode.h"
-#include "../include/utils.h"
+#include "encode.h"
+#include "utils.h"
 
 #define WHITESPACE_CHAR_ENCODED -1
 #define NEWLINE_CHAR_ENCODED -2

@@ -3,8 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "../include/decode.h"
-#include "../include/utils.h"
+#include "decode.h"
+#include "utils.h"
 
 #define REALLOC_SIZE_OFFSET 1024
 

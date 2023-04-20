@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../include/linkedList.h"
+#include "linkedList.h"
 
 void initializeLinkedList(LinkedList *list)
 {
