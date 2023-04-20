@@ -105,7 +105,7 @@ Será armazenado como a string `"EuvurqtufmeUdorpaf"`. Caracteres especiais são
 # Compilação e execução
 
 - `make`: compila o programa.
-- `make test`: compila o programa e executa o programa de teste (codifica e
+- `make test`: executa o programa de teste (codifica e
   decodifica das 2 maneiras)
 - `make check`: verifica se a mensagem original coincide com ambos os arquivos
   decodificados (de maneira diferente) pela codificação.
