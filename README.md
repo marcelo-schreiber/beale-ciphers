@@ -37,9 +37,10 @@ as estruturas de dados e os algoritmos usados.  -->
 
 A estrutura de dados escolhida para armazenar as chaves de decodificação foi uma
 lista encadeada, pois a inserção de uma chave na lista é feita em tempo
-constante, pois há um ponteiro para o final da lista. Além disso, a lista encadeada é bem simples de ser implementada,
-e não há um limite para o número de elementos que podem ser armazenados na lista
-e, principalmente, permite a separação de blocos de memória.
+constante, pois há um ponteiro para o final da lista. Além disso, a lista
+encadeada é bem simples de ser implementada, e não há um limite para o
+número de elementos que podem ser armazenados na lista e, principalmente,
+permite a separação de blocos de memória.
 
 # Algoritmos
 

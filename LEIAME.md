@@ -16,7 +16,7 @@ as estruturas de dados e os algoritmos usados.  -->
   `decodeByKeys()`, que decodifica uma mensagem a partir de um arquivo de chaves
   usando a cifra de Beale.
 - `utils.c`: contém as definições de funções auxiliares usadas em `encode.c`
-  e `decode.c`. arrIdxToChar() e charToArrIdx() são funções auxiliares para a
+  e `decode.c`. `arrIdxToChar()` e `charToArrIdx()` são funções auxiliares para a
   conversão de índices de arrays para caracteres e vice-versa.
 - `linkedlist.c`: contém as definições de funções auxiliares para a implementação
   de uma lista encadeada, usada para armazenar as chaves de decodificação.
@@ -37,9 +37,10 @@ as estruturas de dados e os algoritmos usados.  -->
 
 A estrutura de dados escolhida para armazenar as chaves de decodificação foi uma
 lista encadeada, pois a inserção de uma chave na lista é feita em tempo
-constante. Além disso, a lista encadeada é bem simples de ser implementada,
-e não há um limite para o número de elementos que podem ser armazenados na lista
-e, principalmente, permite a separação de blocos de memória.
+constante, pois há um ponteiro para o final da lista. Além disso, a lista
+encadeada é bem simples de ser implementada, e não há um limite para o
+número de elementos que podem ser armazenados na lista e, principalmente,
+permite a separação de blocos de memória.
 
 # Algoritmos
 
@@ -105,7 +106,7 @@ Será armazenado como a string `"EuvurqtufmeUdorpaf"`. Caracteres especiais são
 # Compilação e execução
 
 - `make`: compila o programa.
-- `make test`: compila o programa e executa o programa de teste (codifica e
+- `make test`: executa o programa de teste (codifica e
   decodifica das 2 maneiras)
 - `make check`: verifica se a mensagem original coincide com ambos os arquivos
   decodificados (de maneira diferente) pela codificação.
