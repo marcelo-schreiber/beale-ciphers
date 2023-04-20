@@ -16,7 +16,7 @@ as estruturas de dados e os algoritmos usados.  -->
   `decodeByKeys()`, que decodifica uma mensagem a partir de um arquivo de chaves
   usando a cifra de Beale.
 - `utils.c`: contém as definições de funções auxiliares usadas em `encode.c`
-  e `decode.c`. arrIdxToChar() e charToArrIdx() são funções auxiliares para a
+  e `decode.c`. `arrIdxToChar()` e `charToArrIdx()` são funções auxiliares para a
   conversão de índices de arrays para caracteres e vice-versa.
 - `linkedlist.c`: contém as definições de funções auxiliares para a implementação
   de uma lista encadeada, usada para armazenar as chaves de decodificação.
