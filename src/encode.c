@@ -72,13 +72,15 @@ void encodeGenerateLetters(struct Letter *letters, FILE *fp)
 
 void encodeGenerateFileLetters(struct Letter *letter, char *filename)
 {
-  FILE *fp = fopen(filename, "w");
+  FILE *does_file_exist = fopen(filename, "r");
 
-  if (fp == NULL)
+  if (does_file_exist != NULL)
   {
-    printf("Error opening file");
+    printf("Arquivo de chaves já existe\n");
     exit(EXIT_FAILURE);
   }
+
+  FILE *fp = fopen(filename, "w");
 
   for (int i = 0; i < NUM_OF_CHARS; i++)
   {

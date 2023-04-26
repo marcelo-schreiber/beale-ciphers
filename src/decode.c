@@ -214,16 +214,9 @@ void decodeByKeys(char *encoded_message_filename, char *keys_filename, char *dec
 void decodeByBook(char *encoded_message_filename, char *book_filename, char *decoded_message_filename)
 {
   FILE *encoded_message_file = fopen(encoded_message_filename, "r");
-
-  if (encoded_message_file == NULL)
-  {
-    printf("Error opening file");
-    exit(EXIT_FAILURE);
-  }
-
   FILE *book_file = fopen(book_filename, "r");
 
-  if (book_file == NULL)
+  if (encoded_message_file == NULL || book_file == NULL)
   {
     printf("Error opening file");
     exit(EXIT_FAILURE);
