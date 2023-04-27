@@ -1,6 +1,11 @@
 .vscode
 
+# generated files
 beale 
 a.out
+MensagemCodificada.txt
+MensagemDecodificada.txt
+MensagemDecodificada2.txt
 
+# generated objects
 /objects/*.o
